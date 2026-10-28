@@ -1,0 +1,23 @@
+# Subject No Army v1.0.0
+# Purpose: AI-controlled subjects whose overlord is a human player should not build army divisions.
+# Condition: is_ai = yes AND is_subject = yes AND overlord = { is_ai = no }
+# Effect: ai_wanted_divisions_factor = -100 -> wanted divisions are pushed to 0, so the AI stops
+#         building new army divisions. The strategy is evaluated dynamically and aborts itself when
+#         the country is no longer a subject or the overlord is no longer a human player.
+# Note: v1.0.0 does NOT forcibly disband existing divisions (planned for a future version).
+
+ZZ_subject_no_army = {
+	allowed = { always = yes }
+
+	enable = {
+		is_ai = yes
+		is_subject = yes
+		overlord = { is_ai = no }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = -100
+	}
+}
